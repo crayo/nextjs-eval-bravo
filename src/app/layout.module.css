@@ -1,3 +1,15 @@
-.container {
+.bodyWrapper {
     @apply mx-auto max-w-screen-lg min-h-screen font-mono p-12;
+}
+.container {
+    @apply grid grid-cols-4 gap-2;
+}
+.title {
+    @apply col-span-full text-3xl text-center mb-5;
+}
+.main {
+    @apply col-span-3 rounded p-2 bg-slate-800;
+}
+.user {
+    @apply col-span-1 rounded p-2 bg-slate-800;
 }
