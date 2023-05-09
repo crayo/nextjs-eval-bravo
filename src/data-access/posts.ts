@@ -1,22 +1,27 @@
-import { getDB } from "@/lib/db";
-import { getLogger } from "@/lib/logger";
 import { v4 as uuidv4 } from 'uuid';
 import { nanoid } from 'nanoid';
 import { stripHtml } from "string-strip-html";
+import { getDB } from "@/lib/db";
+import { getLogger } from "@/lib/logger";
+import { Comment } from "@/data-access/comments";
 
-type NewPost = {
+interface NewPost {
   title: string,
   body: string,
   owner: string
 };
 
-interface CollectionPosts {
+interface Post {
   _id: string,
   urlid: string,
-  timestamp: Date,
   owner: string,
   title: string,
-  body: string
+  body: string,
+  timestamp: Date
+};
+
+interface FullPost extends Post {
+  comments: Comment[]
 };
 
 interface FilterPosts {
@@ -26,7 +31,7 @@ interface FilterPosts {
   title?: string
 };
 
-export const getPosts = async (filter={}, reqID="unknown request id") => {
+export const getPosts = async (filter: FilterPosts={}, reqID="unknown request id"): Promise<Post[]> => {
   // set up our logger
   const logger = getLogger({ reqID, module: "DataAccess:getPosts" });
   // get our database connection
@@ -35,7 +40,7 @@ export const getPosts = async (filter={}, reqID="unknown request id") => {
 
   // fetch the posts
   logger.trace({filter}, "Fetching posts");
-  const posts = await db.collection("posts").find(
+  const posts = await db.collection<Post>("posts").find(
     filter,
     {
       sort: {
@@ -49,7 +54,7 @@ export const getPosts = async (filter={}, reqID="unknown request id") => {
 };
 
 export const getAllPosts = (reqID?: string) => (getPosts({}, reqID));
-export const getPostByUrlid = (urlid: string, reqID?: string) => (getPosts({urlid}, reqID));
+export const getPostByUrlid = async (urlid: string, reqID?: string) => (getPosts({urlid}, reqID));
 
 export const addPost = async (post: NewPost, reqID="unknown request id") => {
   // set up our logger
@@ -61,7 +66,7 @@ export const addPost = async (post: NewPost, reqID="unknown request id") => {
   // add our post
   logger.trace(post, "Adding new post");
   const { owner, title, body } = post;
-  const result = await db.collection<CollectionPosts>("posts").insertOne({
+  const result = await db.collection<Post>("posts").insertOne({
     _id: uuidv4(),
     urlid: nanoid(),
     timestamp: new Date(),
@@ -73,7 +78,7 @@ export const addPost = async (post: NewPost, reqID="unknown request id") => {
   return result;
 };
 
-export const getFullPosts = async (filter: FilterPosts={}, reqID: string="unknown request id") => {
+export const getFullPosts = async (filter: FilterPosts={}, reqID: string="unknown request id"): Promise<FullPost[]> => {
   // set up our logger
   const logger = getLogger({ reqID, module: "DataAccess:getFullPost" });
   // get our database connection
@@ -115,7 +120,7 @@ export const getFullPosts = async (filter: FilterPosts={}, reqID: string="unknow
         comments: { $push: "$comments" }
       }
     }
-  ]).toArray();
+  ]).toArray() as FullPost[];
   logger.trace(postData, "Fetched post and comments");
 
   return postData;

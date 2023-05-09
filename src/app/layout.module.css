@@ -1,0 +1,3 @@
+.container {
+    @apply mx-auto max-w-screen-lg min-h-screen font-mono p-12;
+}

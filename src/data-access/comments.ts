@@ -4,13 +4,21 @@ import { getFullPostByUrlid } from "@/data-access/posts";
 import { v4 as uuidv4 } from 'uuid';
 import { stripHtml } from "string-strip-html";
 
-interface Comment {
+interface InputComment {
   urlid: string,
   comment: string,
   owner: string
 };
 
-export const getCommentsForPost = async (urlid: string, reqID: string="unknown request id") => {
+export type Comment = {
+  _id: string,
+  postId: string,
+  comment: string,
+  owner: string,
+  timestamp: Date
+};
+
+export const getCommentsForPost = async (urlid: string, reqID: string="unknown request id"): Promise<Comment | null> => {
   // set up our logger
   const logger = getLogger({ reqID, module: "DataAccess:getCommentsForPost" });
 
@@ -21,7 +29,7 @@ export const getCommentsForPost = async (urlid: string, reqID: string="unknown r
   return postData.length === 1 ? postData[0].comments : null;
 };
 
-export const addCommentToPost = async (input: Comment, reqID:string="unknown request id") => {
+export const addCommentToPost = async (input: InputComment, reqID:string="unknown request id"): Promise<any> => {
   // set up our logger
   const logger = getLogger({ reqID, module: "DataAccess:addCommentToPost" });
   // get our database connection

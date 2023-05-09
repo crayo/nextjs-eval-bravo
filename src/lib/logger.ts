@@ -15,17 +15,8 @@ interface LoggerChildOpts {
 // initialization function that sets up our primary logger
 const init = () => {
   const level = levels.includes(k_logLevel) ? k_logLevel : "info";
-  const optsEnv = process.env.NODE_ENV === "development" ? {
-    transport: {
-      target: 'pino-pretty',
-      options: {
-        colorize: true,
-      }
-    }
-  } : {};
   const opts = {
-    level,
-    ...optsEnv
+    level
   };
 
   logger = pino(opts);
@@ -37,7 +28,7 @@ const init = () => {
 //
 // Initializes logger if it hasn't already been initialized.
 // returns a configured child logger or the primary logger
-export const getLogger = (childOpts?: LoggerChildOpts) => {
+export const getLogger = (childOpts?: LoggerChildOpts): Logger => {
   if (!logger) {
     init();
   }
