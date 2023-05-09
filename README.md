@@ -32,5 +32,13 @@ Variables can be set in `.env.local` (except for `PORT`).
 - `LOG_LEVEL`: Verbosity level of the logger (e.g. `trace`, `error`, or `silent`)
   - default is `info`
   - example: `LOG_LEVEL=trace npm run dev`
+  - recognized levels
+    - `fatal`
+    - `error`
+    - `warn`
+    - `info`
+    - `debug`
+    - `trace`
+    - `silent`
 - `MONGODB_URI`: The mongodb connection URI
 - `JWT_SECRET`: The secret that will be used to sign JWTs
