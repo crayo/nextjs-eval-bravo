@@ -9,13 +9,7 @@ export const metadata = {
   description: "Suited is learning about Next.js!",
 };
 
-export default function Layout({
-  children,
-  user
-}: {
-  children: React.ReactNode,
-  user: React.ReactNode,
-}) {
+export default function Layout({ children, user }: { children: React.ReactNode, user: React.ReactNode, }) {
   return (
     <html lang="en">
       <body className={`${inter.className} ${styles.bodyWrapper}`}>

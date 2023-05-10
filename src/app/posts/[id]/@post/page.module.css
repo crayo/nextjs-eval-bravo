@@ -1,0 +1,9 @@
+.container {
+
+}
+.title {
+    @apply text-xl text-center mb-2;
+}
+.content {
+    @apply rounded-md p-2 bg-neutral-400;
+}

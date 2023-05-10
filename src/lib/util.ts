@@ -6,4 +6,4 @@ export const parseHeaders = ():{ reqID: string, userToken: string | null } => {
     reqID: requestHeaders.get("x-request-id") || "unknown request id",
     userToken: requestHeaders.get("x-token-user") || null
   };
-}
+};

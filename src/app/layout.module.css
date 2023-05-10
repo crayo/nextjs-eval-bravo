@@ -8,7 +8,7 @@
     @apply col-span-full text-3xl text-center mb-5;
 }
 .main {
-    @apply col-span-3 rounded p-2 bg-slate-800;
+    @apply col-span-3 rounded p-2 bg-stone-200 text-black;
 }
 .user {
     @apply col-span-1 rounded p-2 bg-slate-800;
