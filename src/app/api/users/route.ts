@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { getUsers } from "@/data-access/users";
 import { parseHeaders } from "@/lib/util";
 
-export const GET = async (request: Request): Promise<NextResponse> => {
+export const GET = async (): Promise<NextResponse> => {
   const { reqID } = parseHeaders();
   const users = await getUsers({}, reqID);
 

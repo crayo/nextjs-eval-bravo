@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ReactNode } from "react";
 import styles from "./layout.module.css";
 
-export default async function PostLayout(
+export default function PostLayout(
   {
     children,
     post,
@@ -17,7 +17,7 @@ export default async function PostLayout(
 ) {
   return (
     <div className={styles.container}>
-      <div className={styles.return}><Link href="/">&lt; return to topics</Link></div>
+      <div className={styles.returnlink}><Link href="/">&lt; return to topics</Link></div>
       <div className={styles["container-main"]}>{children}</div>
       <div className={styles["container-post"]}>{post}</div>
       <div className={styles["container-replies"]}>{replies}</div>

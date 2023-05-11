@@ -4,7 +4,7 @@ import { getLogger } from "@/lib/logger";
 import { parseHeaders } from "@/lib/util";
 import styles from "./loading.module.css";
 
-export default async function PostLoading() {
+export default function PostLoading() {
   const { reqID  } = parseHeaders();
   // set up our logger
   const logger = getLogger({ reqID, module: "Page:Post:Loading" });

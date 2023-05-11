@@ -1,12 +1,7 @@
 import jwt from "jsonwebtoken";
 import { getLogger } from "@/lib/logger";
-
+import { TokenUser } from "@/interfaces";
 const k_token = process.env.JWT_TOKEN || "horsebatterystaple";
-
-export interface User {
-  id: string,
-  username: string
-};
 
 const jwtOptsSign = {
   expiresIn: "1h"
@@ -17,7 +12,7 @@ const jwtOptsVerify = {
 };
 
 // create a JWT
-export const createJWT = async (user: User, reqID: string="unknown request id"): Promise<string | undefined> => {
+export const createJWT = async (user: TokenUser, reqID: string="unknown request id"): Promise<string | undefined> => {
   // set up our logger
   const logger = getLogger({ reqID, module: "Lib:Auth:createJWT" });
   return new Promise(async (resolve, reject) => {
@@ -35,7 +30,7 @@ export const createJWT = async (user: User, reqID: string="unknown request id"):
 };
 
 // verify a JWT
-export const verifyUser = async (token: string, reqID: string="unknown request id"): Promise<User> => {
+export const verifyUser = async (token: string, reqID: string="unknown request id"): Promise<TokenUser> => {
   // set up our logger
   const logger = getLogger({ reqID, module: "Lib:Auth:verifyUser" });
   return new Promise(async (resolve, reject) => {
@@ -46,7 +41,7 @@ export const verifyUser = async (token: string, reqID: string="unknown request i
         return reject(err);
       } else {
         logger.trace({decoded}, "Verified JWT");
-        const { id, username } = decoded as User;
+        const { id, username } = decoded as TokenUser;
         return resolve({
           id,
           username
@@ -56,7 +51,7 @@ export const verifyUser = async (token: string, reqID: string="unknown request i
   });
 };
 
-export const getUser = async (cookie: string, reqID: string="unknown request id"): Promise<User | null> => {
+export const getUser = async (cookie: string, reqID: string="unknown request id"): Promise<TokenUser | null> => {
   if (!cookie) return null;
   // set up our logger
   const logger = getLogger({ reqID, module: "Lib:Auth:getUser" });

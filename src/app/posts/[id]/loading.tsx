@@ -4,15 +4,15 @@ import { getLogger } from "@/lib/logger";
 import { parseHeaders } from "@/lib/util";
 import styles from "./loading.module.css";
 
-export default function RepliesLoading() {
+export default function FullPostLoading() {
   const { reqID  } = parseHeaders();
   // set up our logger
-  const logger = getLogger({ reqID, module: "Page:Replies:Loading" });
-  logger.trace("loading replies");
+  const logger = getLogger({ reqID, module: "Page:FullPost:Loading" });
+  logger.trace("loading full post");
 
   return (
     <div className={styles.container}>
-      Loading the post replies!
+      Loading a sub-component!
     </div>
   );
 }

@@ -1,0 +1,18 @@
+.container {
+
+}
+.form-select-user {
+
+}
+.form-select-user > label {
+    @apply text-left;
+}
+.form-select-user > select {
+    @apply w-full bg-stone-200 text-black;
+}
+.form-button-login {
+    @apply text-right mt-2;
+}
+.form-button-login > button {
+    @apply rounded border-2 px-2;
+}

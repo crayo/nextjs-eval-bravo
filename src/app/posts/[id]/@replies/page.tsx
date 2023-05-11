@@ -12,6 +12,12 @@ export default async function PostReplies({ params }:{ params:{ id: string } }) 
   const replies = await getPostReplies(postId, reqID);
   if (!replies) notFound();
 
+  await new Promise(resolve => {
+    setTimeout(() => {
+      return resolve(true);
+    }, 5000);
+  });
+
   return (
     <div className={styles.container}>
       <ul className={styles.replies}>

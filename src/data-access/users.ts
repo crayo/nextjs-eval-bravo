@@ -1,13 +1,8 @@
 import { getDB } from "@/lib/db";
 import { getLogger } from "@/lib/logger";
+import { User } from "@/interfaces";
 
 const k_collectionUsers = "bravo_users";
-
-export interface User {
-  _id: string,
-  id?: string,
-  username: string
-};
 
 interface FilterUser {
   _id?: string,

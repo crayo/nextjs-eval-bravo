@@ -3,7 +3,7 @@
 import { parseHeaders } from "@/lib/util";
 import styles from "./page.module.css";
 
-export default async function Post({ params }:{ params:{ id: string }}) {
+export default function Post({ params }:{ params:{ id: string }}) {
   const { reqID  } = parseHeaders();
   const { id: postId } = params;
 
