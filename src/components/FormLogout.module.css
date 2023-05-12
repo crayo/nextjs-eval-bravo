@@ -1,0 +1,9 @@
+.container {
+
+}
+.form-button-logout {
+    @apply text-right mt-2;
+}
+.form-button-logout > button {
+    @apply rounded border-2 px-2;
+}

@@ -2,15 +2,37 @@
 
 import { User } from "@/interfaces";
 import styles from "./FormLogin.module.css";
+import { useRouter } from 'next/navigation';
 
 export default function FormLogin({ users }:{ users: User[] }) {
+  const router = useRouter();
+
   const handleSubmit = async (event:React.FormEvent) => {
     // Stop the form from submitting and refreshing the page.
     event.preventDefault();
 
     const userid = event.currentTarget.user.value;
 
-    console.log(`Log in! userid=${userid}`);
+    // try logging in
+    console.log(`Logging in user id ${userid}`);
+    const res = await fetch(
+      "/api/login",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({ id: userid })
+      }
+    );
+    if (res) {
+      const data = await res.json();
+      if (data.status === "OK") {
+        console.log("We logged in, let's refresh");
+        return router.refresh();
+      }
+    }
+    console.log("Oh no, something went wrong");
   };
 
   return (

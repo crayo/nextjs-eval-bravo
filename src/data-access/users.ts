@@ -39,6 +39,7 @@ export const getUserByName = async (username: string, reqID: string="unknown req
 };
 
 export const getUserById = async (_id: string, reqID: string="unknown request id"): Promise<User | null> => {
+  if (!_id) return null;
   const users = await getUsers({_id}, reqID);
   return users.length === 1 ? users[0] : null;
 };

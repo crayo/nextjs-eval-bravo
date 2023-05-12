@@ -11,14 +11,14 @@ export const metadata = {
 };
 
 export default function Layout({ children, user, login }: { children: React.ReactNode, user: React.ReactNode, login: React.ReactNode }) {
-  const { userToken } = parseHeaders();
+  const { session } = parseHeaders();
   return (
     <html lang="en">
       <body className={`${inter.className} ${styles.bodyWrapper}`}>
         <div className={styles.container}>
           <div className={styles.title}>{metadata.title}</div>
           <div className={styles.main}>{children}</div>
-          <div className={styles.user}>{userToken ? user : login}</div>
+          <div className={styles.user}>{session?.user ? user : login}</div>
         </div>
       </body>
     </html>
