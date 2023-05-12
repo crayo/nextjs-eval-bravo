@@ -2,39 +2,9 @@ import { nanoid } from 'nanoid';
 import { stripHtml } from "string-strip-html";
 import { getDB } from "@/lib/db";
 import { getLogger } from "@/lib/logger";
+import { NewPost, Post, FullPost, FilterPosts } from "@/interfaces";
 
 const k_collectionPosts = "bravo_posts";
-
-interface NewPost {
-  irt?: string | null,
-  title?: string,
-  content: string,
-  userid: string,
-  username: string
-};
-
-interface Post {
-  _id: string,
-  irt: string | null,
-  userid: string,
-  username: string,
-  title: string | null,
-  content: string,
-  createdAt: Date,
-  deletedAt?: Date | null
-};
-
-interface FullPost extends Post {
-  replies: Post[]
-};
-
-interface FilterPosts {
-  _id?: string,
-  userid?: string,
-  username?: string,
-  title?: string,
-  irt?: string | null
-};
 
 export const getPosts = async (filter: FilterPosts={}, reqID="unknown request id"): Promise<Post[]> => {
   // set up our logger
@@ -121,8 +91,6 @@ export const getFullPostById = async (_id: string, reqID: string="unknown reques
             }
           }
         ],
-//        localField: "_id",
-//        foreignField: "irt",
         as: "replies"
       }
     },

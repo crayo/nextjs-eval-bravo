@@ -12,11 +12,13 @@ export default async function Post({ params }:{ params:{ id: string } }) {
   const post = await getPostById(postId, reqID);
   if (!post) notFound();
 
+/*
   await new Promise(resolve => {
     setTimeout(() => {
       return resolve(true);
     }, 5000);
   });
+*/
 
   return (
     <div className={styles.container}>

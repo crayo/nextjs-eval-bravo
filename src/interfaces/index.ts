@@ -28,3 +28,35 @@ declare module "iron-session" {
     user?: SessionUser;
   }
 }
+
+// Post related interfaces
+export interface NewPost {
+  irt?: string | null,
+  title?: string,
+  content: string,
+  userid: string,
+  username: string
+};
+
+export interface Post {
+  _id: string,
+  irt: string | null,
+  userid: string,
+  username: string,
+  title: string | null,
+  content: string,
+  createdAt: Date,
+  deletedAt?: Date | null
+};
+
+export interface FullPost extends Post {
+  replies: Post[]
+};
+
+export interface FilterPosts {
+  _id?: string,
+  userid?: string,
+  username?: string,
+  title?: string,
+  irt?: string | null
+};
