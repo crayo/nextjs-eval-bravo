@@ -7,9 +7,12 @@ import { getAllRootPosts } from "@/data-access/posts";
 import styles from "./page.module.css";
 
 export default async function Topics() {
-  const { reqID  } = parseHeaders();
+  const { reqID, session } = parseHeaders();
   // set up our logger
   const logger = getLogger({ reqID, module: "Page:Topics" });
+
+  const user = session?.user || null;
+  logger.trace({ user }, "User from session");
 
   const topics = await getAllRootPosts(reqID);
   logger.trace({topics}, "fetched topics");
@@ -18,6 +21,9 @@ export default async function Topics() {
   return (
     <div className={styles.container}>
       <div className={styles.heading}>Topics</div>
+      <div className={styles["form-topic"]}>{
+        user ? `Hello, ${user.username}. There should be a form here for you to post.` : `Please log in to post a new topic.`
+      }</div>
       <ul className={styles["topic-list"]}>
       {
         topics.map(topic => {

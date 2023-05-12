@@ -3,6 +3,10 @@ export interface SessionUser {
   username: string
 };
 
+export interface Session {
+  user: SessionUser | null
+};
+
 export interface User {
   _id: string,
   id?: string,
