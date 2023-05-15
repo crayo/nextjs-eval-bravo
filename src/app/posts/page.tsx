@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { parseHeaders } from "@/lib/util";
 import { getLogger } from "@/lib/logger";
+import FormPost from "@/components/FormPost";
 import { getAllRootPosts } from "@/data-access/posts";
 import styles from "./page.module.css";
 
@@ -22,7 +23,7 @@ export default async function Topics() {
     <div className={styles.container}>
       <div className={styles.heading}>Topics</div>
       <div className={styles["form-topic"]}>{
-        user ? `Hello, ${user.username}. There should be a form here for you to post.` : `Please log in to post a new topic.`
+        user ? <FormPost user={user} /> : `Please log in to post a new topic.`
       }</div>
       <ul className={styles["topic-list"]}>
       {

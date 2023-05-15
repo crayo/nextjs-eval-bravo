@@ -18,7 +18,7 @@ interface PostBody {
 
 export const GET = async (request: NextRequest, { params }:PostParams): Promise<NextResponse> => {
   const { reqID } = parseHeaders();
-  const logger = getLogger({ reqID, params, module:"API:Post:GET" });
+  const logger = getLogger({ reqID, params, module:"API:Post[id]:GET" });
   const { id:postid } = params;
 
   logger.trace("Getting post");
@@ -35,7 +35,7 @@ export const GET = async (request: NextRequest, { params }:PostParams): Promise<
 export const POST = async (request: NextRequest, { params }:PostParams): Promise<NextResponse> => {
   const { id:postid } = params;
   const { reqID } = parseHeaders();
-  const logger = getLogger({ reqID, params, module:"API:Post:POST" });
+  const logger = getLogger({ reqID, params, module:"API:Post[id]:POST" });
   // we'll get the session directly from the request cookie ourselves
   logger.trace("getting session");
   const session = await getSession(request);

@@ -17,7 +17,7 @@ export default function PostLayout(
 ) {
   return (
     <div className={styles.container}>
-      <div className={styles.returnlink}><Link href="/">&lt; return to topics</Link></div>
+      <div className={styles.returnlink}><Link href="/posts">&lt; return to topics</Link></div>
       <div className={styles["container-main"]}>{children}</div>
       <div className={styles["container-post"]}>{post}</div>
       <div className={styles["container-replies"]}>{replies}</div>

@@ -1,0 +1,21 @@
+.container {
+
+}
+.form-post-title {
+
+}
+.form-post-title > input {
+    @apply w-full bg-stone-100 text-black;
+}
+.form-post-content {
+
+}
+.form-post-content > textarea {
+    @apply w-full bg-stone-100 text-black;
+}
+.form-button-reply {
+    @apply text-right mt-2;
+}
+.form-button-reply > button {
+    @apply rounded border-2 px-2;
+}

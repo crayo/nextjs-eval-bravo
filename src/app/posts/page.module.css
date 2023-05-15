@@ -4,6 +4,9 @@
 .heading {
     @apply text-xl text-center mb-6;
 }
+.form-topic {
+    @apply rounded-md bg-teal-950 text-white mb-4 p-2;
+}
 .topic-list {
 
 }
